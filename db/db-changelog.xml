@@ -51,4 +51,10 @@ http://www.liquibase.org/xml/ns/dbchangelog-ext ">
         </createTable>
     </changeSet>
 
+    <changeSet id="Create index" author="User">
+        <createIndex tableName="profiles" indexName="idx_pro_bre_id">
+            <column name="pro_bre_id"/>
+        </createIndex>
+    </changeSet>
+
 </databaseChangeLog>
