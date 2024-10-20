@@ -21,4 +21,34 @@ http://www.liquibase.org/xml/ns/dbchangelog-ext ">
         </createTable>
     </changeSet>
 
+    <changeSet id="Insertions data to breeds table" author="User">
+        <insert tableName="breeds">
+            <column name="bre_name" value="Golden Retriever"/>
+        </insert>
+        <insert tableName="breeds">
+            <column name="bre_name" value="American Staffordshire Terrier"/>
+        </insert>
+        <insert tableName="breeds">
+            <column name="bre_name" value="German Shepherd Doger"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="Create profiles table" author="User">
+        <createTable tableName="profiles">
+            <column name="pro_id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="pro_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pro_bre_id" type="int">
+                <constraints foreignKeyName="fk_profiles_breeds" references="breeds(bre_id)"/>
+            </column>
+            <column name="pro_height" type="int"/>
+            <column name="pro_weight" type="int"/>
+            <column name="pro_description" type="varchar(4000)"/>
+            <column name="pro_image_url" type="varchar(100)"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>
