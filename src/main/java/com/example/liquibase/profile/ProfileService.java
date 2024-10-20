@@ -1,20 +1,18 @@
 package com.example.liquibase.profile;
 
 import com.example.liquibase.breed.BreedRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 @Service
 public class ProfileService {
 
-    private final ProfileRepository profileRepository;
-    private final BreedRepository breedRepository;
-
-    @Autowired
-    private ProfileService(ProfileRepository profileRepository, BreedRepository breedRepository) {
-        this.profileRepository = profileRepository;
-        this.breedRepository = breedRepository;
-    }
+    ProfileRepository profileRepository;
+    BreedRepository breedRepository;
 
     public void addProfile(NewProfileRequest newProfileRequest) {
         Profile profile = new Profile();
