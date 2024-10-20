@@ -21,3 +21,6 @@ create table if not exists profiles
 );
 
 create index if not exists idx_pro_bre_id on profiles (pro_bre_id);
+
+alter table if exists profiles
+    add column if not exists pro_gender char(1);
