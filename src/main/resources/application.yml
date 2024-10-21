@@ -9,6 +9,7 @@ spring:
         username: postgres
         password: postgres
         driver-class-name: org.postgresql.Driver
+
     jpa:
         database-platform:
         database: postgresql
@@ -22,6 +23,10 @@ spring:
         properties:
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
+
     main:
         log-startup-info: false
+
+    liquibase:
+        change-log: classpath:/db/changelog/db-changelog.xml
 
