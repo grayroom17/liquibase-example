@@ -29,6 +29,9 @@ http://www.liquibase.org/xml/ns/dbchangelog-ext">
         <insert tableName="breeds">
             <column name="bre_name" value="German Shepherd Doger"/>
         </insert>
+        <rollback>
+            <delete tableName="breeds"/>
+        </rollback>
     </changeSet>
 
     <changeSet id="Create profiles table" author="User">
