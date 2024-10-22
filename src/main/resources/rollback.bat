@@ -1,1 +1,0 @@
-liquibase --driver=org.postgresql.Driver --classpath="C:\Users\user\.gradle\caches\modules-2\files-2.1\org.postgresql\postgresql\42.7.4\264310fd7b2cd76738787dc0b9f7ea2e3b11adc1\postgresql-42.7.4.jar" --changeLogFile=db-changelog.xml --url="jdbc:postgresql://localhost:5433/postgres" --username=postgres --password=postgres rollbackCount 1
