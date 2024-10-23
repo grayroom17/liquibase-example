@@ -1,0 +1,178 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="user (generated)" id="1729701677380-1">
+        <createTable tableName="employees">
+            <column autoIncrement="true" name="emp_no" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="employees_pkey"/>
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(14)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="VARCHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hire_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-2">
+        <createTable tableName="dept_emp">
+            <column name="emp_no" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="dept_emp_pkey"/>
+            </column>
+            <column name="dept_no" type="CHAR(4)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="dept_emp_pkey"/>
+            </column>
+            <column name="from_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-3">
+        <createTable tableName="dept_manager">
+            <column name="emp_no" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="dept_manager_pkey"/>
+            </column>
+            <column name="dept_no" type="CHAR(4)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="dept_manager_pkey"/>
+            </column>
+            <column name="from_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-4">
+        <createTable tableName="salaries">
+            <column name="emp_no" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="salaries_pkey"/>
+            </column>
+            <column name="salary" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="from_date" type="date">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="salaries_pkey"/>
+            </column>
+            <column name="to_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-5">
+        <createTable tableName="salaries_text">
+            <column name="emp_no" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="salaries_text_pkey"/>
+            </column>
+            <column name="salary" type="VARCHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="from_date" type="date">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="salaries_text_pkey"/>
+            </column>
+            <column name="to_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-6">
+        <createTable tableName="departments">
+            <column name="dept_no" type="CHAR(4)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="departments_pkey"/>
+            </column>
+            <column name="dept_name" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-7">
+        <createIndex indexName="employees_first_name_idx" tableName="employees">
+            <column name="first_name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-8">
+        <createIndex indexName="employees_birth_date_idx" tableName="employees">
+            <column name="birth_date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-9">
+        <createIndex indexName="employees_first_name_birth_date_idx" tableName="employees">
+            <column name="first_name"/>
+            <column name="birth_date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-10">
+        <createIndex indexName="dept_emp_dept_no_idx" tableName="dept_emp">
+            <column name="dept_no"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-11">
+        <createIndex indexName="dept_emp_to_date_idx" tableName="dept_emp">
+            <column name="to_date"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-12">
+        <createIndex indexName="dept_manager_dept_no_idx" tableName="dept_manager">
+            <column name="dept_no"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-13">
+        <createIndex indexName="salaries_salary_idx" tableName="salaries">
+            <column name="salary"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-14">
+        <createIndex indexName="salaries_text_salary_idx" tableName="salaries_text">
+            <column name="salary"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-15">
+        <addUniqueConstraint columnNames="dept_name" constraintName="departments_dept_name_key" tableName="departments"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-16">
+        <createTable tableName="titles">
+            <column name="emp_no" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="titles_pkey"/>
+            </column>
+            <column name="title" type="VARCHAR(51)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="titles_pkey"/>
+            </column>
+            <column name="from_date" type="date">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="titles_pkey"/>
+            </column>
+            <column name="to_date" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-17">
+        <addForeignKeyConstraint baseColumnNames="dept_no" baseTableName="dept_emp" constraintName="dept_emp_dept_no_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="dept_no" referencedTableName="departments" validate="true"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-18">
+        <addForeignKeyConstraint baseColumnNames="emp_no" baseTableName="dept_emp" constraintName="dept_emp_emp_no_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="emp_no" referencedTableName="employees" validate="true"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-19">
+        <addForeignKeyConstraint baseColumnNames="dept_no" baseTableName="dept_manager" constraintName="dept_manager_dept_no_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="dept_no" referencedTableName="departments" validate="true"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-20">
+        <addForeignKeyConstraint baseColumnNames="emp_no" baseTableName="dept_manager" constraintName="dept_manager_emp_no_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="emp_no" referencedTableName="employees" validate="true"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-21">
+        <addForeignKeyConstraint baseColumnNames="emp_no" baseTableName="salaries" constraintName="salaries_emp_no_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="emp_no" referencedTableName="employees" validate="true"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-22">
+        <addForeignKeyConstraint baseColumnNames="emp_no" baseTableName="salaries_text" constraintName="salaries_text_emp_no_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="emp_no" referencedTableName="employees" validate="true"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1729701677380-23">
+        <addForeignKeyConstraint baseColumnNames="emp_no" baseTableName="titles" constraintName="titles_emp_no_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="emp_no" referencedTableName="employees" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
