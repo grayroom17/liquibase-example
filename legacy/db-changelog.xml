@@ -8,10 +8,109 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
 
-<changeSet id="Extend title to 51 characters" author="User">
-    <modifyDataType tableName="titles" columnName="title" newDataType="varchar(51)"/>
-    <rollback>
-        <modifyDataType tableName="titles" columnName="title" newDataType="varchar(50)"/>
-    </rollback>
-</changeSet>
+    <changeSet id="Approach 2" author="User">
+        <sql>
+            create table departments
+            (
+                dept_no   char(4)     not null
+                    primary key,
+                dept_name varchar(40) not null
+                    unique
+            );
+
+            create table dept_emp
+            (
+                emp_no    integer not null
+                    references employees
+                        on delete cascade,
+                dept_no   char(4) not null
+                    references departments
+                        on delete cascade,
+                from_date date    not null,
+                to_date   date    not null,
+                primary key (emp_no, dept_no)
+            );
+            create index dept_emp_dept_no_idx
+                on dept_emp (dept_no);
+            create index dept_emp_to_date_idx
+                on dept_emp (to_date);
+
+            create table dept_manager
+            (
+                emp_no    integer not null
+                    references employees
+                        on delete cascade,
+                dept_no   char(4) not null
+                    references departments
+                        on delete cascade,
+                from_date date    not null,
+                to_date   date    not null,
+                primary key (emp_no, dept_no)
+            );
+            create index dept_manager_dept_no_idx
+                on dept_manager (dept_no);
+
+            create table employees
+            (
+                emp_no     serial
+                    primary key,
+                birth_date date        not null,
+                first_name varchar(14) not null,
+                last_name  varchar(16) not null,
+                gender     varchar(1)  not null,
+                hire_date  date        not null
+            );
+            create index employees_first_name_idx
+                on employees (first_name);
+            create index employees_birth_date_idx
+                on employees (birth_date);
+            create index employees_first_name_birth_date_idx
+                on employees (first_name, birth_date);
+
+            create table salaries
+            (
+                emp_no    integer not null
+                    references employees
+                        on delete cascade,
+                salary    integer not null,
+                from_date date    not null,
+                to_date   date    not null,
+                primary key (emp_no, from_date)
+            );
+            create index salaries_salary_idx
+                on salaries (salary);
+
+            create table salaries_text
+            (
+                emp_no    integer     not null
+                    references employees
+                        on delete cascade,
+                salary    varchar(11) not null,
+                from_date date        not null,
+                to_date   date        not null,
+                primary key (emp_no, from_date)
+            );
+            create index salaries_text_salary_idx
+                on salaries_text (salary);
+
+            create table titles
+            (
+                emp_no    integer     not null
+                    references employees
+                        on delete cascade,
+                title     varchar(51) not null,
+                from_date date        not null,
+                to_date   date,
+                primary key (emp_no, title, from_date)
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="Extend title to 51 characters" author="User">
+        <modifyDataType tableName="titles" columnName="title" newDataType="varchar(51)"/>
+        <rollback>
+            <modifyDataType tableName="titles" columnName="title" newDataType="varchar(50)"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
