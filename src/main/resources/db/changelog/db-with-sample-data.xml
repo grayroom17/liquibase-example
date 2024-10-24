@@ -2,13 +2,9 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <include file="/db/changelog/db-changelog.xml" />
+    <include file="src/main/resources/db/changelog/db-changelog.xml"/>
 
     <changeSet id="Sample profiles" author="DBA presents">
         <insert tableName="PROFILES">
@@ -42,6 +38,27 @@
             <column name="PRO_DESCRIPTION" value="I have my issues but I am looking for a dog who will love me after all." />
             <column name="PRO_IMAGE_URL" value="/img/CutiePie.jpg" />
         </insert>
+    </changeSet>
+
+    <changeSet id="change null values on pro_gender column" author="User">
+        <update tableName="profiles">
+            <column name="pro_gender" value="U"/>
+            <where>pro_gender is null</where>
+        </update>
+        <rollback>
+            <update tableName="profiles">
+                <column name="pro_gender"/>
+                <where>pro_gender = 'U'</where>
+            </update>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="Make pro_gender column not nullable" author="User">
+        <addNotNullConstraint tableName="profiles" columnName="pro_gender"/>
+    </changeSet>
+
+    <changeSet id="Drop pro_gender column" author="User">
+        <dropColumn tableName="profiles" columnName="pro_gender"/>
     </changeSet>
 
 </databaseChangeLog>
